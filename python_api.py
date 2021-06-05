@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+# File name: python_api.py
+#Description: Exchange-currency-API
+# Author: Viktor Vodnev
+# Date: 05-06-2021
+
 import requests
 import datetime
 import json
