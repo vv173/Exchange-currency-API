@@ -17,7 +17,7 @@ def json_response(URL, parameters):
         response = requests.get(URL, params=parameters)
         json_response = response.json()
     except:
-        logging.warning("Failed to make api request")
+        logging.exception("Failed to make api request")
     finally:
         logging.debug("Successful api request ")
     return json_response
@@ -33,7 +33,7 @@ def data_cp(parameters, json_response):
             data[0].append(currency)
             data[1].append(json_response['rates'][currency])
     except:
-        logging.warning("Error getting information from a json file")
+        logging.exception("Error getting information from a json file")
 
     return data
 
@@ -56,9 +56,9 @@ def convert_to_json(filename, data):
             csv_writer = csv.writer(csv_file)
             csv_writer.writerows(data)
             logging.debug("Successful writing to file ")
-    except OSError as e:
-        logging.error("Errors during file creation")
     except:
+        logging.exception("Errors during file creation")
+    finally:
         logging.debug("The file is completely filled with data")
 
 def main():
