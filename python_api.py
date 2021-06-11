@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 
 # File name: python_api.py
 #Description: Exchange-currency-API
@@ -12,19 +12,29 @@ import json
 import csv
 
 def json_response(URL, parameters):
-    response = requests.get(URL, params=parameters)
-    json_response = response.json()
+    logging.info("Starting json response")
+    try:
+        response = requests.get(URL, params=parameters)
+        json_response = response.json()
+    except:
+        logging.warning("Failed to make api request")
+    finally:
+        logging.debug("Successful api request ")
     return json_response
 
 def data_cp(parameters, json_response):
+    logging.info("Getting information from a jason file")
+    try:
+        #zamiana ciągu walut na listę
+        currencies = parameters['symbols'].split(',')
 
-    #zamiana ciągu walut na listę
-    currencies = parameters['symbols'].split(',')
+        data = [[],[]]
+        for currency in currencies:  
+            data[0].append(currency)
+            data[1].append(json_response['rates'][currency])
+    except:
+        logging.warning("Error getting information from a json file")
 
-    data = [[],[]]
-    for currency in currencies:  
-        data[0].append(currency)
-        data[1].append(json_response['rates'][currency])
     return data
 
 #konwertowanie uniksowego znacznika czasu na domyślną datę 
@@ -41,8 +51,6 @@ def file_name(creation_time):
     return file_name
 
 def convert_to_json(filename, data):
-    logging.basicConfig(level=logging.DEBUG, filename='exchange.log',
-     format='%(asctime)s %(levelname)s:%(message)s')
     try:
         with open(filename, 'w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
@@ -50,6 +58,8 @@ def convert_to_json(filename, data):
             logging.debug("Successful writing to file ")
     except OSError as e:
         logging.error("Errors during file creation")
+    except:
+        logging.debug("The file is completely filled with data")
 
 def main():
     
@@ -57,6 +67,9 @@ def main():
     URL = 'http://api.exchangeratesapi.io/v1/latest'
     BASE_CURRENCY = 'EUR'
     SYMBOLS = 'USD,PLN,GBP,CNY,RUB'
+
+    logging.basicConfig(level=logging.DEBUG, filename='exchange.log',
+     format='%(asctime)s %(levelname)s:%(message)s')
 
     #parametry dla api get request 
     parameters = {
