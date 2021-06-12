@@ -6,12 +6,12 @@ RUN pip install requests
 RUN apk add restic
 
 
-ENV RESTIC_PASSWORD="12345"
+ENV RESTIC_PASSWORD="VVdtsc4v5QtUCNXA"
 ENV RESTIC_REPOSITORY=/srv/backup
 
 
-RUN mkdir /bin/exchange
-RUN mkdir /srv/backup
+RUN ["mkdir", "/bin/exchange"]
+RUN ["mkdir", "/srv/backup"]
 RUN restic init --repo /srv/backup
 
 COPY python_api.py /bin/exchange/
