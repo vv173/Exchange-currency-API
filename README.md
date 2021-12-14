@@ -1,17 +1,16 @@
 # Exchange-currency-API 💰
 Code regularly (e.g. every 3 hours) downloads the EURO exchange rate for a few selected currencies (max 5) provided by the API 
 
-Aby uruchomić rozwiązanie powinno Państwo posiadać plikami: Dockerfile 🐳, root(plik do działania CRON) i skryptem on nazwie restic.sh - dla rozpoczęcia backupów.
+To run the solution, you should have the following files: Dockerfile 🐳, root (a file for CRON operation), and a script called restic.sh - to start backups.
 
-Krótki opis działania: Python skrypt przez zewnętrzne API co 3 godziny pobiera kurs waluty EURO na 5 walut. Przy budowanie kontenera Docker Dockerfile 🐳 za pomocą plika root buduje zdefiniowany CRON. Zapisane pliki .csv są backupowe z użyciem klienta restic, który buduje się przez skrypt restic.sh
+How it works: Python script downloads the EURO exchange rate for 5 currencies via an external API every 3 hours. Builds defined CRON when building Docker Dockerfile 🐳 with root file. The saved .csv files are backed up using the restic client, which is built by the restic.sh script
 
-Sposób uruchomienia rozwiązania:
-1) Zbudować obraz Docker za pomocą polecenia '🐳 docker image build'. (Wszystkie pliki muszą znajdować się w tym samym katalogu co plik Dockerfile 🐳)
+How to run the solution:
 
-2)Uruchomić kontener dockera za pomocą polecenia '🐳 docker container run -dt --name "nazwa kontenera" "nazwa obrazu"'.
+1) Build a Docker image with the command '🐳 docker image build'. (All files must be in the same directory as Dockerfile 🐳)
 
-Przydatne linki:
+2) Run the docker container with the command '🐳 **docker container run -dt --name** "container name" "image name"'.
 
-GitHub: https://github.com/vv173/Exchange-currency-API.git
+Useful links:
 
 DockerHub: https://hub.docker.com/r/v17v3/apicronbackup/tags 🐳
