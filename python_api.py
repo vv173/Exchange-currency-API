@@ -25,7 +25,7 @@ def json_response(URL, parameters):
 def data_cp(parameters, json_response):
     logging.info("Getting information from a jason file")
     try:
-        #zamiana ciągu walut na listę
+        #converting a string of currencies into a list
         currencies = parameters['symbols'].split(',')
 
         data = [[],[]]
@@ -37,7 +37,7 @@ def data_cp(parameters, json_response):
 
     return data
 
-#konwertowanie uniksowego znacznika czasu na domyślną datę 
+#converting a Unix timestamp to the default date
 def time_convert(json_response):
     timestamp = json_response['timestamp']                
     creation_time = datetime.datetime.fromtimestamp(
@@ -45,7 +45,7 @@ def time_convert(json_response):
         ).strftime('%d-%m-%Y_%H_%M_%S')
     return creation_time
 
-#ustawiam nazwę pliku csv w formacie "nazwa - data - godzina"
+#sets the name of the CSV file in the format "name - date - time" 
 def file_name(creation_time):
     file_name = 'euro_exchange_rate_' + str(creation_time) + '.csv'
     return file_name
@@ -71,7 +71,7 @@ def main():
     logging.basicConfig(level=logging.DEBUG, filename='exchange.log',
      format='%(asctime)s %(levelname)s:%(message)s')
 
-    #parametry dla api get request 
+    #parameters for API get request
     parameters = {
         'access_key': API_KEY,
         'base': BASE_CURRENCY, 
