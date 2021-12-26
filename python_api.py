@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # File name: python_api.py
-#Description: Exchange-currency-API
+# Description: Exchange-currency-API
 # Author: Viktor Vodnev
 # Date: 05-06-2021
 
