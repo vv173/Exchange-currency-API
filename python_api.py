@@ -53,12 +53,12 @@ def time_convert(json_response):
     timestamp = json_response['timestamp']                
     creation_time = datetime.datetime.fromtimestamp(
         int(timestamp)
-        ).strftime('%d-%m-%Y_%H_%M_%S')
+    ).strftime('%d-%m-%Y_%H_%M_%S')
     return creation_time
 
 #sets the name of the CSV file in the format "name - date - time" 
 def file_name(creation_time):
-    file_name = 'euro_exchange_rate_' + str(creation_time) + '.csv'
+    file_name = './exchange/' + 'euro_exchange_rate_' + str(creation_time) + '.csv'
     return file_name
 
 def convert_to_csv(filename, data):
