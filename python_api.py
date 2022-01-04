@@ -16,7 +16,6 @@ def arguments():
     logging.info("Start parsing arguments ")
     try:
         parser = argparse.ArgumentParser(description='Arguments get parsed via --commands')
-        parser.add_argument("-a", type=str, default=None, required=True, help="Enter the link to the API")
         parser.add_argument("-k", type=str, default=None, required=True, help="Enter the key for the API")
         args = parser.parse_args()
     except:
@@ -75,7 +74,7 @@ def convert_to_csv(filename, data):
 def main():
     args = arguments()
     API_KEY = args.k
-    URL = args.a
+    URL = "http://api.exchangeratesapi.io/v1/latest"
     BASE_CURRENCY = 'EUR'
     CURRENCIES = 'USD,PLN,GBP,CNY,RUB'
 
