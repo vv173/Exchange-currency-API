@@ -9,11 +9,11 @@ How to run the solution:
 
 1) Build a Docker image with the command
 
-        `docker build -t v17v3/apicronbackup:v3.1 .`
+        docker build -t v17v3/apicronbackup:v3.1 .
 
 2) Run the docker container with the command
 
-        `docker run -dt --env API_KEY='your_valid_api_key' v17v3/apicronbackup:v3.1`
+        docker run -dt --env API_KEY='your_valid_api_key' v17v3/apicronbackup:v3.1
 
 Useful links:
 
