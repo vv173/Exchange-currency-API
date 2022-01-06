@@ -12,17 +12,22 @@ import json
 import csv
 import argparse
 
+
 def arguments():
     logging.info("Start parsing arguments ")
     try:
-        parser = argparse.ArgumentParser(description='Arguments get parsed via --commands')
-        parser.add_argument("-k", type=str, default=None, required=True, help="Enter the key for the API")
+        parser = argparse.ArgumentParser(
+            description='Arguments get parsed via --commands')
+
+        parser.add_argument("-k", type=str, default=None, required=True,
+                            help="Enter the key for the API")
         args = parser.parse_args()
     except:
         logging.exception("Error reading arguments ")
     finally:
         logging.debug("Argument reading completed successfully")
     return args
+
 
 def json_response(URL, parameters):
     logging.info("Starting json response")
@@ -34,31 +39,35 @@ def json_response(URL, parameters):
         logging.debug("Successful api request ")
     return response.json()
 
+
 def data_cp(parameters, json_response):
     logging.info("Getting information from a jason file")
     try:
-        #converting a string of currencies into a list
+        # converting a string of currencies into a list
         currencies = parameters['symbols'].split(',')
-        data = [[],[]]
-        for currency in currencies:  
+        data = [[], []]
+        for currency in currencies:
             data[0].append(currency)
             data[1].append(json_response['rates'][currency])
     except:
         logging.exception("Error getting information from a json file")
     return data
 
-#converting a Unix timestamp to the default date
+
+# converting a Unix timestamp to the default date
 def time_convert(json_response):
-    timestamp = json_response['timestamp']                
+    timestamp = json_response['timestamp']
     creation_time = datetime.datetime.fromtimestamp(
         int(timestamp)
     ).strftime('%d-%m-%Y_%H_%M_%S')
     return creation_time
 
-#sets the name of the CSV file in the format "name - date - time" 
+
+# sets the name of the CSV file in the format "name - date - time"
 def file_name(creation_time):
-    file_name = './exchange/' + 'euro_exchange_rate_' + str(creation_time) + '.csv'
-    return file_name
+    file_name = './exchange/' + 'euro_exchange_rate_' + str(creation_time)
+    return file_name + '.csv'
+
 
 def convert_to_csv(filename, data):
     try:
@@ -71,6 +80,7 @@ def convert_to_csv(filename, data):
     finally:
         logging.debug("The file is completely filled with data")
 
+
 def main():
     args = arguments()
     API_KEY = args.k
@@ -79,12 +89,12 @@ def main():
     CURRENCIES = 'USD,PLN,GBP,CNY,RUB'
 
     logging.basicConfig(level=logging.DEBUG, filename='exchange.log',
-     format='%(asctime)s %(levelname)s:%(message)s')
+                        format='%(asctime)s %(levelname)s:%(message)s')
 
-    #parameters for API request
+    # parameters for API request
     parameters = {
         'access_key': API_KEY,
-        'base': BASE_CURRENCY, 
+        'base': BASE_CURRENCY,
         'symbols': CURRENCIES
     }
 
