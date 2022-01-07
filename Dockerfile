@@ -18,8 +18,6 @@ COPY --chown=runner:runner restic.sh .
 RUN chmod +x ./python_api.py && \
     chmod +x ./restic.sh
 
-USER runner
-
 RUN mkdir /tmp/crontabs
 COPY runner /tmp/crontabs/runner
 
