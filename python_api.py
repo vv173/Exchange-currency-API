@@ -3,7 +3,7 @@
 # File name: python_api.py
 # Description: Exchange-currency-API
 # Author: Viktor Vodnev
-# Date: 03-01-2021
+# Date: 03-01-2022
 
 import requests
 import datetime
