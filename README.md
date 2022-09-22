@@ -1,5 +1,5 @@
 # Exchange-currency-API 💰
-Code regularly (e.g. every 3 hours) downloads the EURO exchange rate for a few selected currencies (max 5) provided by the API 
+Code regularly (e.g. every 3 hours) downloads the EURO exchange rate for a few selected currencies (max 5) provided by the API. 
 
 To run the solution, you should have the following files: Dockerfile 🐳, runner (a file for CRON operation), and a script called restic.sh - to start backups.
 
